@@ -1,10 +1,17 @@
-require "sinatra"
-require "sinatra/reloader" if development?
-require "pry-byebug"
+require 'sinatra'
+require 'sinatra/reloader' if development?
+require 'pry-byebug'
 
-get "/" do
-  "Hello world!, my name is Milan"
-  "List"
-  "Add"
-  "Remove"
+get '/' do
+  @lists = ['recipe1', 'recipe2', 'recipe3']
+  erb :index
+end
+
+get '/about' do
+  erb :about
+end
+
+get '/team/:username' do
+  puts params[:username]
+  "The username is #{params[:username]}"
 end
