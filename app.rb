@@ -1,17 +1,26 @@
 require 'sinatra'
 require 'sinatra/reloader' if development?
 require 'pry-byebug'
+require_relative 'cookbook'
+require_relative 'recipe'
+
+cookbook = Cookbook.new('recipes.csv')
 
 get '/' do
-  @lists = ['recipe1', 'recipe2', 'recipe3']
+  recipes = cookbook.all
+  @recipes = recipes
   erb :index
 end
 
-get '/about' do
-  erb :about
+get '/recipes/:name' do
+  @recipe = cookbook.find(params[:name])
+  erb :show
 end
 
-get '/team/:username' do
-  puts params[:username]
-  "The username is #{params[:username]}"
+get 'recipes/new' do
+  erb :new
+end
+
+get 'recipes/delete' do
+  erb :delete
 end

@@ -1,6 +1,7 @@
-<% @lists.each do |list| %>
-  <li>
-    <%= list %>
-  </li>
-<% end %>
-  <a>test </a>
+<h1>List of all the recipes</h1>
+<ul>
+  <% @recipes.each do |recipe| %>
+    <li><a href="/recipes/<%= recipe.name %>"><%= recipe.name %></a> ~ <%= recipe.description %></li>
+  <% end %>
+</ul>
+<a href="/recipes/new">Add a new recipe</a> / <a href="/recipes/delete">Delete a recipe</a>
